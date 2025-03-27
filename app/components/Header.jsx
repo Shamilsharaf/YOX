@@ -3,13 +3,16 @@ import { assets } from "@/assets/assets";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 
-const Header = () => {
+const Header = ({ id }) => {
+  // Added id prop
   const openInstagram = () => {
     window.open("https://www.instagram.com/yox.mensstore/", "_blank");
   };
 
   return (
-    <div className="relative w-full h-screen flex">
+    <section id={id} className="relative w-full h-screen flex">
+      {" "}
+      {/* Added id attribute */}
       {/* Left side - Text content */}
       <div className="w-full md:w-1/2 h-full flex items-center justify-center p-8 bg-gray-50">
         <div className="text-left max-w-md w-full">
@@ -17,7 +20,6 @@ const Header = () => {
             <span className="text-2xl md:text-3xl font-medium text-gray-600">
               Welcome to{" "}
             </span>
-
             <span className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600">
               YOX
             </span>
@@ -38,7 +40,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
       {/* Right side - Image */}
       <div className="hidden md:block md:w-1/2 h-full relative">
         <Image
@@ -51,7 +52,7 @@ const Header = () => {
           sizes="50vw"
         />
       </div>
-    </div>
+    </section>
   );
 };
 
