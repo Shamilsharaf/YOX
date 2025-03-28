@@ -26,7 +26,6 @@ const Navbar = () => {
     closeMenu();
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -63,8 +62,8 @@ const Navbar = () => {
           />
         </a>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 px-4 lg:px-8 py-2 mx-auto bg-white/80 backdrop-blur-sm rounded-full text-sm lg:text-base">
+        {/* Desktop Navigation - Increased font size */}
+        <ul className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 px-4 lg:px-8 py-2 mx-auto bg-white/80 backdrop-blur-sm rounded-full text-lg">
           {["top", "stores", "about", "contact"].map((item) => (
             <li key={item}>
               <a
@@ -89,14 +88,14 @@ const Navbar = () => {
           aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? (
-            <FaTimes className="w-6 h-6 text-gray-800" />
+            <FaTimes className="w-7 h-7 text-gray-800" />
           ) : (
-            <FaBars className="w-6 h-6 text-gray-800" />
+            <FaBars className="w-7 h-7 text-gray-800" />
           )}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Increased font size */}
       <div
         ref={sideMenuRef}
         className={`md:hidden fixed top-0 right-0 w-64 h-full z-40 bg-white shadow-xl transition-transform duration-300 ease-in-out transform ${
@@ -109,7 +108,7 @@ const Navbar = () => {
             className="self-end p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500 rounded"
             aria-label="Close menu"
           >
-            <FaTimes className="w-5 h-5 text-gray-800" />
+            <FaTimes className="w-6 h-6 text-gray-800" />
           </button>
 
           <ul className="flex flex-col gap-6">
@@ -118,7 +117,7 @@ const Navbar = () => {
                 <a
                   href={`#${item}`}
                   onClick={(e) => handleSmoothScroll(e, item)}
-                  className="block px-4 py-3 text-lg hover:bg-amber-50 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="block px-4 py-3 text-xl hover:bg-amber-50 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 >
                   {item === "top"
                     ? "Home"

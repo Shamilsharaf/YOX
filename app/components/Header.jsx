@@ -16,11 +16,11 @@ const Header = ({ id }) => {
       {/* Left side - Text content */}
       <div className="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex items-center justify-center p-4 sm:p-8 bg-gray-50 order-2 md:order-1">
         <div className="text-center md:text-left max-w-md w-full">
-          <h1 className="mb-4">
-            <span className="text-2xl sm:text-3xl md:text-3xl font-medium text-gray-600">
-              Welcome to{" "}
+          <h1 className="mb-4 flex flex-col md:block">
+            <span className="text-2xl sm:text-3xl md:text-3xl font-medium text-gray-600 md:mr-2">
+              Welcome to
             </span>
-            <span className="text-5xl sm:text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 block mt-2">
+            <span className="text-5xl sm:text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 md:inline-block">
               YOX
             </span>
           </h1>
