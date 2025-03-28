@@ -5,10 +5,10 @@ import Image from "next/image";
 const Stores = ({ id }) => {
   // Added id prop for navigation
   const storeLocations = [
-    { image: assets.store1, name: "Iritty" },
-    { image: assets.store2, name: "Irikkur" },
-    { image: assets.store3, name: "Mattannur" },
-    { image: assets.store4, name: "Kannur" },
+    { image: assets.store1, name: "IRITTY" },
+    { image: assets.store2, name: "IRIKKUR" },
+    { image: assets.store3, name: "MATTANNUR" },
+    { image: assets.store4, name: "KANNUR" },
   ];
 
   return (
@@ -42,13 +42,12 @@ const Stores = ({ id }) => {
                 priority={index < 2} // Optimize loading for first 2 images
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                <div>
+                <div className="absolute inset-0 flex flex-col justify-end items-center p-6">
                   <h3 className="text-white text-xl font-semibold">
                     {store.name}
                   </h3>
-                  <p className="text-amber-300 text-sm mt-1">Visit Us Today</p>{" "}
-                  {/* Added subtle CTA */}
                 </div>
+                {/* Added subtle CTA */}
               </div>
             </div>
           ))}

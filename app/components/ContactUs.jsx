@@ -107,7 +107,7 @@ const ContactUs = ({ id }) => {
                   <h4 className="text-lg font-semibold text-gray-800">
                     Call Us
                   </h4>
-                  <p className="text-gray-600">+91 1234567890</p>
+                  <p className="text-gray-600">+91 8113910531</p>
                 </div>
               </div>
 
@@ -115,7 +115,7 @@ const ContactUs = ({ id }) => {
                 <FaEnvelope className="text-gray-600 text-xl mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-lg font-semibold text-gray-800">Email</h4>
-                  <p className="text-gray-600">contact@yoxclothing.com</p>
+                  <p className="text-gray-600">Yoxinternational10@gmail.com</p>
                 </div>
               </div>
 
@@ -200,13 +200,19 @@ const ContactUs = ({ id }) => {
               <h4 className="text-md font-semibold mb-3">Follow Us</h4>
               <div className="flex gap-3 mb-3">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/yox.mensstore/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   <FaInstagram className="text-xl" />
                 </a>
                 <a
-                  href="#"
+                  href={
+                    "https://www.facebook.com/yoxgentsshoppe/?profile_tab_item_selected=about&_rdr"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   <FaFacebook className="text-xl" />

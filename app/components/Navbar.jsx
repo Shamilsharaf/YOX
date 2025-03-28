@@ -1,18 +1,20 @@
 "use client";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
-import { useRef } from "react";
-import Link from "next/link";
+import { useRef, useEffect, useState } from "react";
+import { FaTimes, FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const sideMenuRef = useRef();
+  const menuButtonRef = useRef();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const openMenu = () => {
-    sideMenuRef.current.style.transform = "translateX(-16rem)";
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const closeMenu = () => {
-    sideMenuRef.current.style.transform = "translateY(16rem)";
+    setIsMenuOpen(false);
   };
 
   const handleSmoothScroll = (e, id) => {
@@ -21,79 +23,121 @@ const Navbar = () => {
       behavior: "smooth",
       block: "start",
     });
-    closeMenu(); // Close mobile menu after click
+    closeMenu();
   };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMenuOpen &&
+        sideMenuRef.current &&
+        !sideMenuRef.current.contains(event.target) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMenuOpen]);
 
   return (
     <>
-      <nav className="w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50 shadow-md bg-white">
-        <a href="#top" onClick={(e) => handleSmoothScroll(e, "top")}>
+      <nav className="w-full fixed px-4 sm:px-6 lg:px-8 xl:px-[8%] py-3 sm:py-4 flex items-center justify-between z-50 shadow-md bg-white">
+        <a
+          href="#top"
+          onClick={(e) => handleSmoothScroll(e, "top")}
+          className="focus:outline-none focus:ring-2 focus:ring-amber-500 rounded"
+          aria-label="Go to top"
+        >
           <Image
             src={assets.logo}
             alt="YOX Logo"
-            className="w-40 cursor-pointer mr-10"
+            width={160}
+            height={40}
+            className="w-32 sm:w-40 cursor-pointer"
             priority
           />
         </a>
 
-        <ul className="hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 mx-auto text-xl">
-          <li>
-            <a href="#top" onClick={(e) => handleSmoothScroll(e, "top")}>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#stores" onClick={(e) => handleSmoothScroll(e, "stores")}>
-              Stores
-            </a>
-          </li>
-          <li>
-            <a href="#about" onClick={(e) => handleSmoothScroll(e, "about")}>
-              About Us
-            </a>
-          </li>
-          <li>
-            <a
-              href="#contact"
-              onClick={(e) => handleSmoothScroll(e, "contact")}
-            >
-              Contact
-            </a>
-          </li>
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 px-4 lg:px-8 py-2 mx-auto bg-white/80 backdrop-blur-sm rounded-full text-sm lg:text-base">
+          {["top", "stores", "about", "contact"].map((item) => (
+            <li key={item}>
+              <a
+                href={`#${item}`}
+                onClick={(e) => handleSmoothScroll(e, item)}
+                className="px-3 py-2 hover:text-amber-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 rounded"
+              >
+                {item === "top"
+                  ? "Home"
+                  : item.charAt(0).toUpperCase() + item.slice(1)}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        {/* Mobile menu button remains same */}
+        {/* Mobile Menu Button */}
+        <button
+          ref={menuButtonRef}
+          onClick={toggleMenu}
+          className="md:hidden p-2 focus:outline-none focus:ring-2 focus:ring-amber-500 rounded"
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? (
+            <FaTimes className="w-6 h-6 text-gray-800" />
+          ) : (
+            <FaBars className="w-6 h-6 text-gray-800" />
+          )}
+        </button>
       </nav>
 
       {/* Mobile Menu */}
-      <ul
+      <div
         ref={sideMenuRef}
-        className="flex md:hidden flex-col gap-4 py-20 px-10 fixed top-0 bottom-0 -right-64 w-64 z-50 h-screen bg-yellow-50 transition duration-500"
+        className={`md:hidden fixed top-0 right-0 w-64 h-full z-40 bg-white shadow-xl transition-transform duration-300 ease-in-out transform ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
       >
-        <div className="absolute right-6 top-6" onClick={closeMenu}>
-          <Image src={assets.close} alt="" className="w-5 cursor-pointer" />
+        <div className="flex flex-col h-full p-6">
+          <button
+            onClick={closeMenu}
+            className="self-end p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500 rounded"
+            aria-label="Close menu"
+          >
+            <FaTimes className="w-5 h-5 text-gray-800" />
+          </button>
+
+          <ul className="flex flex-col gap-6">
+            {["top", "stores", "about", "contact"].map((item) => (
+              <li key={item}>
+                <a
+                  href={`#${item}`}
+                  onClick={(e) => handleSmoothScroll(e, item)}
+                  className="block px-4 py-3 text-lg hover:bg-amber-50 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  {item === "top"
+                    ? "Home"
+                    : item.charAt(0).toUpperCase() + item.slice(1)}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-        <li>
-          <a href="#top" onClick={(e) => handleSmoothScroll(e, "top")}>
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#stores" onClick={(e) => handleSmoothScroll(e, "stores")}>
-            Stores
-          </a>
-        </li>
-        <li>
-          <a href="#about" onClick={(e) => handleSmoothScroll(e, "about")}>
-            About Us
-          </a>
-        </li>
-        <li>
-          <a href="#contact" onClick={(e) => handleSmoothScroll(e, "contact")}>
-            Contact
-          </a>
-        </li>
-      </ul>
+      </div>
+
+      {/* Overlay when menu is open */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
     </>
   );
 };
